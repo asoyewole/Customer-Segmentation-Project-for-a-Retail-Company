@@ -21,16 +21,18 @@ def data_generator(data, number):
     data['Address'] = [fake.address() for i in range(number)]
     data['Phone'] = [fake.phone_number() for i in range(number)]
     data['Password'] = [fake.password() for i in range(number)]
+    data['Email'] = [fake.email() for i in range(number)]
 
     end_time = datetime.now()
     loop_time = end_time - start_time
     return data, loop_time
 
 
-data = pd.read_csv('Online Retail.csv')
+data = pd.read_csv(
+    "C:/Users/asoye/Documents/Projects/online+retail/Online Retail.csv")
 number = data.shape[0]
 df, time_taken = data_generator(data, number)
 print(df.head())
 print(f'loops completed in {time_taken}')
 
-df.to_csv('Online_Retail_with_fake_data.csv', index = False, encoding='utf-8')
+df.to_csv('Online_Retail_with_fake_data.csv', index=False, encoding='utf-8')
