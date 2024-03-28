@@ -2,6 +2,24 @@
 -- Please log an issue at https://github.com/pgadmin-org/pgadmin4/issues/new/choose if you find any bugs, including reproduction steps.
 BEGIN;
 
+CREATE TABLE IF NOT EXISTS public.retail_staging
+(
+InvoiceNo character varying,
+StockCode character varying,
+Description character varying,
+Quantity character varying,
+InvoiceDate character varying,
+UnitPrice character varying,
+CustomerID character varying,
+Country character varying,
+FirstName character varying,
+LastName character varying,
+Address character varying,
+Phone character varying,
+Email character varying,
+PRIMARY KEY (CustomerID)
+);
+
 
 CREATE TABLE IF NOT EXISTS public.customer_dim
 (
