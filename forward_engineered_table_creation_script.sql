@@ -30,16 +30,16 @@ CREATE TABLE IF NOT EXISTS public.sales_measure
     sales_id serial NOT NULL,
     invoice_number character varying,
     "quantity purchased" integer,
-    invoice_date timestamp without time zone[],
+    invoice_date timestamp without time zone,
     unit_price numeric
 );
-
+  
 COMMENT ON COLUMN public.sales_measure.invoice_number
     IS 'invoice number is included under the sales measure rather than creating a seperate invoice dimension. This is because there are limited information about the invoice on our source document. A seperate invoice dimension will not lend positive credence to this analysis.';
 
 CREATE TABLE IF NOT EXISTS public.retail_staging
 (
-    "invoiceNo" character varying,
+    invoiceNo character varying,
     stockcode character varying,
     description character varying,
     quantity character varying,
