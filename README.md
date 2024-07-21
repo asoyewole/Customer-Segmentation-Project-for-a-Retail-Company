@@ -1,63 +1,31 @@
-# Customer Segmentation for a Retail Company
+# Online Retail Customer Segmentation
 
-## Introduction
+This project analyzes an online retail dataset to segment customers based on their purchasing behavior using K-Means clustering. The analysis includes data cleaning, feature engineering, dimensionality reduction, and clustering to identify distinct customer segments.
 
-This project focuses on customer segmentation for an online retail company based in the UK, with customers from various countries. The dataset used for this project is sourced from the UCI data repository. This project follows the CRISP-DM approach, encompassing business understanding, data understanding, data preparation/exploration, and modeling. The aim is to showcase proficiency in data management, analysis, and modeling.
+## Key Steps in the Project
 
-A key part of this project is the creation of an analytical dimensional database model using the star schema. To expand the dataset, we augmented the base dataset from UCI with additional data using the Python Faker library. However, the segmentation model is built solely on the original data extracted from the denormalized database.
+### 1. Data Cleaning and Preprocessing
+- **Zero Unit Prices**: Removed records with zero unit prices to ensure only valid sales transactions were included.
+- **Cancelled Transactions**: Identified and marked transactions with invoice numbers starting with 'C' as cancelled.
+- **Date Splitting**: Extracted day, month, and weekday from the invoice date to analyze seasonal trends.
 
-## Business Understanding
+### 2. Feature Engineering
+- **RFM Analysis**: 
+  - **Recency**: Measured days since the last purchase for each customer.
+  - **Frequency**: Counted the number of transactions and total quantity purchased.
+  - **Monetary**: Calculated total and average spending per customer.
+- **Unique Products**: Determined the variety of products purchased by each customer.
+- **Cancellation Frequency**: Measured how often customers cancelled transactions.
 
-For online businesses, cross-selling and up-selling to existing customers is crucial for success. This retail company has thousands of customers, making manual review of preferences impractical. By understanding customer habits, the company can tailor advertisements and promotions to relevant customer groups. Analyzing historical customer behavior will enhance the company's ability to target existing customers based on their preferences.
+### 3. Modeling
+- **Feature Scaling**: Applied standardization to ensure features contributed equally to the model.
+- **Principal Component Analysis (PCA)**: Reduced dimensions to three components, explaining over 80% of the variance.
+- **K-Means Clustering**: Determined the optimal number of clusters using silhouette scores and identified three customer segments.
 
-## Data Understanding
-
-To address the business problem, we created customer segments using information on customer behavior and purchase history. These segments group customers with similar behaviors, aiding the development of a recommendation system. Meanwhile, exploratory data analysis provides immediate insights into existing data, informing model development.
-
-The company maintains a normalized database for transaction processing. We created a new denormalized dimensional model optimized for analytical processing using PostgreSQL.
-
-### Dimensional Modeling
-
-A dimensional model was created to demonstrate expertise in SQL databases. We used the Faker library to generate additional fields such as first name, last name, address, phone, email, and password. This augmented data is spread across three tables: `customer_dim`, `stock_dim`, and `sales_measure`. A staging table was also included to load data into the dimensional model using SQL scripts.
-
-### SQL and Bash Scripting
-
-The conceptual database model was forward-engineered to generate SQL scripts for creating tables. We wrote a table loading script to extract data from the staging table and load it into the dimensions and fact table. A bash script was written to execute all SQL scripts, automating the process using crontab for regular updates.
-
-## Data Preparation
-
-Data extraction from the database was done using `psycopg2`, with the password securely stored in an `.env` file. We extracted the necessary data using `pandas.read_sql()` with a SQL payload.
-
-### Exploratory Data Analysis
-
-The exploratory data analysis includes identifying data size, reviewing samples, data types, and providing summary statistics. We handled missing values, duplicates, and zero unit prices, ensuring data cleanliness for further analysis.
-
-### Data Cleansing
-
-- **Missing Data**: Removed records with missing `customer_id` and `description`.
-- **Duplicate Data**: Removed duplicate transactions identified as data entry errors.
-- **Zero Unit Price**: Removed records with zero unit price.
-
-### Feature Engineering
-
-We engineered features like recency, frequency, and monetary value for segmentation analysis:
-
-- **Recency**: Time since the last purchase.
-- **Frequency**: Number of purchases made by a customer.
-- **Monetary**: Total amount spent by a customer.
-
-### Canceled Transactions and Amount Spent
-
-Identified canceled transactions using invoice numbers starting with 'C'. Calculated the amount spent by each customer.
-
-### Date Splitting
-
-Split invoice dates into day, month, and year to identify seasonal trends in purchasing behavior.
+### 4. Cluster Analysis
+- **Segment 0**: Occasional shoppers with average spending and a higher likelihood of returning purchases.
+- **Segment 1**: One-off shoppers with low transaction volumes and a limited range of product purchases.
+- **Segment 2**: Regular shoppers who spend the most, purchase a wide variety of products, and have a higher cancellation frequency.
 
 ## Conclusion
-
-This project demonstrates expertise in data management, dimensional modeling, and customer segmentation. It provides valuable insights into customer behavior, aiding the development of targeted marketing strategies for the retail company.
-
----
-
-Feel free to customize the content to better suit your project's specifics or add any additional sections if needed.
+The project successfully segmented customers into three distinct groups, providing insights into their purchasing behavior. These insights can help tailor marketing strategies and improve customer engagement. Future work could involve using these segments for predictive modeling or targeted marketing campaigns.
