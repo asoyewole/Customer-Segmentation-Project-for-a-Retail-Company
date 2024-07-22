@@ -3,6 +3,7 @@
 This project analyzes an online retail dataset to segment customers based on their purchasing behavior using K-Means clustering. The analysis includes data cleaning, feature engineering, dimensionality reduction, and clustering to identify distinct customer segments.
 
 ## Key Steps in the Project
+![Blank diagram](https://github.com/user-attachments/assets/583f9162-2f22-40af-ac8a-66cd9a3367a4)
 
 ### 1. Data Cleaning and Preprocessing
 - **Zero Unit Prices**: Removed records with zero unit prices to ensure only valid sales transactions were included.
